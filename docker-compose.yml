@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./kpi-app-backend
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./kpi-app-backend/.env.docker
+    # environment:
+    #   - DB_USER=${DB_USER}
+    #   - DB_PASSWORD=${DB_PASSWORD}
+    #   - DB_SERVER=${DB_SERVER:-SPHILSQL15}
+    #   - DB_DATABASE=${DB_DATABASE:-SXC-GLO-PKPI-S1}
+    #   - PORT=3001
+    restart: always
+
+  frontend:
+    build: ./kpi-app
+    ports:
+      # Expose frontend on port 8080 (Mapped to Nginx port 80)
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: always
