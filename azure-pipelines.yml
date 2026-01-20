@@ -8,7 +8,7 @@ resources:
 variables:
   # TODO: Create a Docker Registry Service Connection in Azure DevOps
   # and replace 'your-acr-service-connection' with its name.
-  dockerRegistryServiceConnection: 'your-acr-service-connection'
+  dockerRegistryServiceConnection: 'SXC-ACR-Connection'
   imageRepositoryBackend: 'kpi-app-backend'
   imageRepositoryFrontend: 'kpi-app-frontend'
   containerRegistry: 'yoursmsregistry.azurecr.io'
