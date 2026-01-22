@@ -1,51 +1,33 @@
 trigger:
-- master
-- main
+  - main
+  - master
+  - staging
+  - development
 
 resources:
-- repo: self
+  repositories:
+    - repository: templates
+      type: git
+      name: Tech SMS/platform-sms-automation
+      ref: main
 
-variables:
-  # TODO: Create a Docker Registry Service Connection in Azure DevOps
-  # and replace 'your-acr-service-connection' with its name.
-  dockerRegistryServiceConnection: 'SXC-ACR-Connection'
-  imageRepositoryBackend: 'kpi-app-backend'
-  imageRepositoryFrontend: 'kpi-app-frontend'
-  containerRegistry: 'sxcperformance.azurecr.io'
-  dockerfilePathBackend: '$(Build.SourcesDirectory)/kpi-app-backend/Dockerfile'
-  dockerfilePathFrontend: '$(Build.SourcesDirectory)/kpi-app/Dockerfile'
-  tag: '$(Build.BuildId)'
+jobs:
+  - template: deployImage/build-image.yml@templates
+    parameters:
+      imageName: 'kpi-app-backend'
+      dockerfile: 'kpi-app-backend/Dockerfile'
+      npm: true
+      npmLogin: 'false'
+      test: 'true'
+      scanPath: 'kpi-app-backend/**/*.json'
+      suppressionPath: 'suppress-owasp.xml'
 
-  # Agent VM image name
-  agentPoolName: 'Default'
-
-stages:
-- stage: Build
-  displayName: Build and push stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      name: $(agentPoolName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push Backend image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepositoryBackend)
-        dockerfile: $(dockerfilePathBackend)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-          latest
-
-    - task: Docker@2
-      displayName: Build and push Frontend image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepositoryFrontend)
-        dockerfile: $(dockerfilePathFrontend)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
-          latest
+  - template: deployImage/build-image.yml@templates
+    parameters:
+      imageName: 'kpi-app-frontend'
+      dockerfile: 'kpi-app/Dockerfile'
+      npm: true
+      npmLogin: 'false'
+      test: 'true'
+      scanPath: 'kpi-app/**/*.json'
+      suppressionPath: 'suppress-owasp.xml'
