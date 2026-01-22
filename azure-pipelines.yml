@@ -1,6 +1,5 @@
 trigger:
   - main
-  - master
   - staging
   - development
 
@@ -8,26 +7,24 @@ resources:
   repositories:
     - repository: templates
       type: git
-      name: Tech SMS/platform-sms-automation
+      name: "Tech SMS/platform-sms-automation"
       ref: main
 
 jobs:
   - template: deployImage/build-image.yml@templates
     parameters:
-      imageName: 'kpi-app-backend'
-      dockerfile: 'kpi-app-backend/Dockerfile'
       npm: true
       npmLogin: 'false'
       test: 'true'
-      scanPath: 'kpi-app-backend/**/*.json'
+      # dependencyCheck: 'true'
+      scanPath: 'kpi-app-backend'
       suppressionPath: 'suppress-owasp.xml'
 
   - template: deployImage/build-image.yml@templates
     parameters:
-      imageName: 'kpi-app-frontend'
-      dockerfile: 'kpi-app/Dockerfile'
       npm: true
       npmLogin: 'false'
       test: 'true'
-      scanPath: 'kpi-app/**/*.json'
+      # dependencyCheck: 'true'
+      scanPath: 'kpi-app'
       suppressionPath: 'suppress-owasp.xml'
