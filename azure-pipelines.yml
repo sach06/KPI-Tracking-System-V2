@@ -11,9 +11,10 @@ resources:
       ref: main
       endpoint: sms-digital-TechSMS-platform-sms-automation-SXC-PERFORMANCE-KPI
 
-jobs:
-  - job: build_backend
-    template: deployImage/build-image.yml@templates
+stages:
+- stage: BuildBackend
+  jobs:
+  - template: deployImage/build-image.yml@templates
     parameters:
       npm: true
       npmLogin: 'false'
@@ -21,8 +22,9 @@ jobs:
       scanPath: 'kpi-app-backend'
       suppressionPath: 'suppress-owasp.xml'
 
-  - job: build_frontend
-    template: deployImage/build-image.yml@templates
+- stage: BuildFrontend
+  jobs:
+  - template: deployImage/build-image.yml@templates
     parameters:
       npm: true
       npmLogin: 'false'
