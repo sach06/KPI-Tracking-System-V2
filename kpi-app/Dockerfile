@@ -1,5 +1,8 @@
 # Build Stage
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
+
+# Update OS packages to fix vulnerabilities
+RUN apk update && apk upgrade --no-cache
 
 WORKDIR /app
 
@@ -13,6 +16,9 @@ RUN npm run build
 
 # Serve Stage
 FROM nginx:alpine
+
+# Update OS packages to fix vulnerabilities
+RUN apk update && apk upgrade --no-cache
 
 # Copy built assets from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
