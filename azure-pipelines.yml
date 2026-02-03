@@ -2,29 +2,28 @@ trigger:
   - main
   - staging
   - development
-
+ 
 resources:
   repositories:
     - repository: templates
       type: git
-      name: "SXC-PERFORMANCE-KPI/platform-sms-automation"
+      name: Tech SMS/platform-sms-automation
       ref: main
-
+      endpoint: sms-digital-TechSMS-platform-sms-automation-SXC-PERFORMANCE-KPI
+ 
 jobs:
   - template: deployImage/build-image.yml@templates
     parameters:
       npm: true
       npmLogin: 'false'
       test: 'true'
-      # dependencyCheck: 'true'
       scanPath: 'kpi-app-backend'
       suppressionPath: 'suppress-owasp.xml'
-
+ 
   - template: deployImage/build-image.yml@templates
     parameters:
       npm: true
       npmLogin: 'false'
       test: 'true'
-      # dependencyCheck: 'true'
       scanPath: 'kpi-app'
       suppressionPath: 'suppress-owasp.xml'
