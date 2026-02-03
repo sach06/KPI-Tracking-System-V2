@@ -19,8 +19,8 @@ stages:
       npm: 'true'
       npmLogin: 'false'
       test: 'true'
-      scanPath: 'kpi-app-backend'
-      projectName: 'kpi-tracking-backend'
+      scanPath: '.'
+      serviceName: 'kpi-backend'
       suppressionPath: 'suppress-owasp.xml'
 
 - stage: BuildFrontend
@@ -30,6 +30,6 @@ stages:
       npm: 'true'
       npmLogin: 'false'
       test: 'true'
-      scanPath: 'kpi-app'
-      projectName: 'kpi-tracking-frontend'
+      scanPath: '.'
+      serviceName: 'kpi-frontend'
       suppressionPath: 'suppress-owasp.xml'
