@@ -16,9 +16,9 @@ stages:
   jobs:
   - template: deployImage/build-image.yml@templates
     parameters:
-      npm: true
-      npmLogin: 'false'
-      test: 'true'
+      npm: false
+      npmLogin: false
+      test: true
       scanPath: 'kpi-app-backend'
       suppressionPath: 'suppress-owasp.xml'
 
@@ -26,8 +26,8 @@ stages:
   jobs:
   - template: deployImage/build-image.yml@templates
     parameters:
-      npm: true
-      npmLogin: 'false'
-      test: 'true'
+      npm: false
+      npmLogin: false
+      test: true
       scanPath: 'kpi-app'
       suppressionPath: 'suppress-owasp.xml'
