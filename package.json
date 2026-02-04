@@ -1,6 +1,6 @@
 {
     "name": "kpi-tracking-system-v2",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "private": true,
     "description": "Root package file for SMS Pipeline compatibility",
     "scripts": {
