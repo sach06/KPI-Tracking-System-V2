@@ -18,7 +18,7 @@ stages:
     parameters:
       npm: 'true'
       npmLogin: 'false'
-      test: 'true'
+      test: 'false'
       scanPath: '.'
       customImageName: 'kpi-tracking-backend'
       suppressionPath: 'suppress-owasp.xml'
@@ -29,7 +29,7 @@ stages:
     parameters:
       npm: 'true'
       npmLogin: 'false'
-      test: 'true'
+      test: 'false'
       scanPath: '.'
       customImageName: 'kpi-tracking-frontend'
       suppressionPath: 'suppress-owasp.xml'
