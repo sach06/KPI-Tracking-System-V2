@@ -18,8 +18,8 @@ services:
   frontend:
     build: ./kpi-app
     ports:
-      # Expose frontend on port 8080 (Mapped to Nginx port 80)
-      - "8080:80"
+      # Expose frontend on standard port 80
+      - "80:80"
     depends_on:
       - backend
     restart: always
