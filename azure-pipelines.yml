@@ -21,6 +21,7 @@ stages:
       test: 'false'
       scanPath: 'kpi-app-backend'
       customImageName: 'kpi-tracking-backend'
+      dependencyCheck: 'true'
       suppressionPath: 'suppress-owasp.xml'
 
 - stage: BuildFrontend
@@ -32,4 +33,5 @@ stages:
       test: 'false'
       scanPath: 'kpi-app'
       customImageName: 'kpi-tracking-frontend'
+      dependencyCheck: 'true'
       suppressionPath: 'suppress-owasp.xml'
