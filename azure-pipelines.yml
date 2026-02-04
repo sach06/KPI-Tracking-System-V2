@@ -19,7 +19,7 @@ stages:
       npm: 'true'
       npmLogin: 'false'
       test: 'false'
-      scanPath: '.'
+      scanPath: 'kpi-app-backend'
       customImageName: 'kpi-tracking-backend'
       suppressionPath: 'suppress-owasp.xml'
 
@@ -30,6 +30,6 @@ stages:
       npm: 'true'
       npmLogin: 'false'
       test: 'false'
-      scanPath: '.'
+      scanPath: 'kpi-app'
       customImageName: 'kpi-tracking-frontend'
       suppressionPath: 'suppress-owasp.xml'
