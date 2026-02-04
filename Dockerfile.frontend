@@ -1,8 +1,8 @@
 # Build Stage
 FROM node:20-alpine AS build
 
-# Update OS packages to fix vulnerabilities
-RUN apk update && apk upgrade --no-cache
+# Update OS packages and global npm to fix vulnerabilities
+RUN apk update && apk upgrade --no-cache && npm install -g npm@latest
 
 WORKDIR /app
 
