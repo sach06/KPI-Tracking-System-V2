@@ -2,9 +2,14 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-// Choose driver: Default to native (Windows Auth) if no DB_USER is provided
-const useNativeDriver = !process.env.DB_USER;
+// Choose driver: Default to native (Windows Auth) ONLY if on Windows and no DB_USER provided
+const useNativeDriver = !process.env.DB_USER && process.platform === 'win32';
 const sql = useNativeDriver ? require('mssql/msnodesqlv8') : require('mssql');
+
+if (!process.env.DB_USER && process.platform !== 'win32') {
+  console.error('❌ ERROR: DB_USER environment variable is missing.');
+  console.error('👉 If you are running in Docker, ensure your .env.docker file exists and is correctly loaded.');
+}
 
 const app = express();
 
